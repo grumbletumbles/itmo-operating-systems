@@ -26,6 +26,10 @@ do
 					echo $result
 			esac
 			;;
+		"QUIT")
+			echo "exited"
+			exit 0
+			;;
 		*)
 			killall tail
 			echo "handler error"
