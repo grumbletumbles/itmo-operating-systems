@@ -19,15 +19,15 @@ do
 			case $command in 
 				"+")
 					result=$(($result + $line))
-					echo $reuslt
+					echo "$result"
 					;;
 				"*")
 					result=$(($result * $line))
-					echo $result
+					echo "$result"
 			esac
 			;;
 		"QUIT")
-			echo "exited"
+			echo "handler done"
 			exit 0
 			;;
 		*)

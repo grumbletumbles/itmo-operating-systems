@@ -6,7 +6,7 @@ do
 	echo "$line" > pipe
 	if [[ "$line" == "QUIT" ]];
 	then
-		echo "done"
+		echo "generator done"
 		exit 0
 	fi
 
