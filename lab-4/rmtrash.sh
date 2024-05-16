@@ -28,10 +28,10 @@ value=$(echo $value | awk '{print NF}')
 
 if [ -z $value ];
 then
-	ln "$PWD"$1 "/home/user/.trash/1"
+	ln "$PWD/"$1 "/home/user/.trash/1"
 else
 	value=$(($value + 1))
-	ln "$PWD"$1 "/home/user/.trash/"$value
+	ln "$PWD/"$1 "/home/user/.trash/"$value
 fi
 
 echo $(readlink -f $1) $value >> /home/user/.trash.log
