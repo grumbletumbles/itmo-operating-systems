@@ -18,6 +18,11 @@ then
 	exit 1
 fi
 
+if [[ ! -e "/home/user/.trash" ]]
+then
+	mkdir /home/user/.trash
+fi
+
 value=$(find "/home/user/.trash/" -type f -name "[1-9]+" | sed -e 's,.trash/,,')
 value=$(echo $value | awk '{print NF}')
 
