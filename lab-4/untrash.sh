@@ -3,6 +3,7 @@
 trashdir="/home/user/.trash"
 trashlog="/home/user/.trash.log"
 home="/home/user"
+labdir="/home/user/itmo-operating-systems/lab-4"
 
 if [[ $# > 1 ]];
 then
@@ -67,20 +68,20 @@ fi
 for i in $(grep "$1" $trashlog | awk '{ print $NF }')
 do
 	file=$(grep $i $trashlog | awk '{ $NF=""; print $0 }')
-	file=$(echo "$filename" | sed 's/ *$//')
-	read -p "${filename} Are you sure?: [y/n] " ans
+	file=$(echo "$file" | sed 's/ *$//')
+	read -p "${file} Are you sure?: [y/n] " ans
 	case "$ans" in
 		"y")
 			newfilename=""
 			num=$i
-			restoredir=$(echo "$filename" | awk 'BEGIN{FS=OFS="/"}; { $NF=""; print $0 }')
+			restoredir=$(echo "$file" | awk 'BEGIN{FS=OFS="/"}; { $NF=""; print $0 }')
 			filename=$(echo "$file" | awk 'BEGIN{FS="/"}; { print $NF }')
 			if [[ ! -d $restoredir ]];
 			then
 				echo "Directory ${restoredir} not found. File \"${filename}\" will be restored in home directory."
 				if [[ -f "${home}/${filename}" ]];
 				then
-					read -p "File \"${filename}\ already exists. Enter the new name: " newfilename
+					read -p "File \"${filename}\" already exists. Enter the new name: " newfilename
 					ln "${trashdir}/${num}" "${home}/${newfilename}"
 					rm "${trashdir}/${num}" 
 				else
@@ -94,7 +95,7 @@ do
 					ln "${trashdir}/${num}" "${restoredir}/${newfilename}"
 					rm "${trashdir}/${num}" 
 				else
-					ln "${trashdir}/${num}" "${newfilename}"
+					ln "${trashdir}/${num}" "${restoredir}/${filename}"
 					rm "${trashdir}/${num}" 
 				fi
 			fi
