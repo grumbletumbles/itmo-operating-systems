@@ -34,7 +34,7 @@ fi
 #	ln "$PWD/"$1 "/home/user/.trash/"$value
 #fi
 
-value=$(cat /home/user/.trash.log | sort -nk2,2 | tail -1)
+value=$(cat /home/user/.trash.log | sort -nk2,2 | tail -1 | awk '{ print $2}')
 value=$(($value + 1))
 ln "$PWD/"$1 "/home/user/.trash/"$value
 
