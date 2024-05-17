@@ -91,7 +91,7 @@ do
 			else
 				if [[ -f "${filename}" ]];
 				then
-					read -p "File \"${filename}\ already exists. Enter the new name: " newfilename
+					read -p "File \"${filename}\" already exists. Enter the new name: " newfilename
 					ln "${trashdir}/${num}" "${restoredir}/${newfilename}"
 					rm "${trashdir}/${num}" 
 				else
