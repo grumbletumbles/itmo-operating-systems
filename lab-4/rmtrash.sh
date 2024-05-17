@@ -23,16 +23,20 @@ then
 	mkdir /home/user/.trash
 fi
 
-value=$(find "/home/user/.trash/" -type f -name "*[0-9]*" | sed -e 's,.trash/,,')
-value=$(echo $value | awk '{print NF}')
+#value=$(find "/home/user/.trash/" -type f -name "*[0-9]*" | sed -e 's,.trash/,,')
+#value=$(echo $value | awk '{print NF}')
+#
+#if [ -z $value ];
+#then
+#	ln "$PWD/"$1 "/home/user/.trash/1"
+#else
+#	value=$(($value + 1))
+#	ln "$PWD/"$1 "/home/user/.trash/"$value
+#fi
 
-if [ -z $value ];
-then
-	ln "$PWD/"$1 "/home/user/.trash/1"
-else
-	value=$(($value + 1))
-	ln "$PWD/"$1 "/home/user/.trash/"$value
-fi
+value=$(cat /home/user/.trash.log | sort -nk2,2 | tail -1)
+value=$(($value + 1))
+ln "$PWD/"$1 "/home/user/.trash/"$value
 
 echo $(readlink -f $1) $value >> /home/user/.trash.log
 rm $1

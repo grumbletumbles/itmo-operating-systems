@@ -86,7 +86,7 @@ do
 					rm "$trashdir/$num" 
 				else
 					ln "$trashdir/$num" "$home/$filename"
-					rm "$trashdir/${num"
+					rm "$trashdir/$num"
 				fi
 			else
 				if [[ -f "$filename" ]];
