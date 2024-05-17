@@ -8,14 +8,14 @@ while true;
 do
 	cpu=$(ps -p $pid0 -o %cpu | tail -n +2)
 	if [[ $(echo "$cpu > 10" | bc -l) ]];
-	do
+	then
 		renice 1 -p $pid0
-	done
+	fi
 
 	if [[ $(echo "$cpu < 9" | bc -l) ]];
-	do
+	then
 		renice -1 -p $pid0
-	done
+	fi
 	sleep .1
 done
 #renice +10 -p $pid0
