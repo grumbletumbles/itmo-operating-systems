@@ -51,7 +51,7 @@ a=""
 # TODO change the lab dir to the correct one
 for i in $(grep "$1" $trashlog | awk '{ print $1 }')
 do
-	a=$(echo $i | sed -e 's,/home/user/lab4/,,')
+	a=$(echo $i | sed -e 's,/home/user/lab-4/,,')
 	if [ $a == $f ];
 	then 
 		break
@@ -88,7 +88,7 @@ do
 					rm "${trashdir}/${num}"
 				fi
 			else
-				if [[ -f "${filename}"]];
+				if [[ -f "${filename}" ]];
 				then
 					read -p "File \"${filename}\ already exists. Enter the new name: " newfilename
 					ln "${trashdir}/${num}" "${restoredir}/${newfilename}"
