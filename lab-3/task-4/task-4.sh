@@ -6,15 +6,16 @@ sh loop.sh&pid1=$!
 
 while true;
 do
-	cpu=$(ps -p $pid0 -o $cpu | tail -n +2)
-	if [[ $cpu -gt 10 ]];
+	cpu=$(ps -p $pid0 -o %cpu | tail -n +2)
+	if [[ $(echo "$cpu > 10" | bc -l) ]];
 	do
-		renice +1 -p $pid0
+		renice 1 -p $pid0
 	done
 
-	if [[ $cpu -lt 9 ]];
+	if [[ $(echo "$cpu < 9" | bc -l) ]];
 	do
 		renice -1 -p $pid0
 	done
+	sleep .1
 done
 #renice +10 -p $pid0
