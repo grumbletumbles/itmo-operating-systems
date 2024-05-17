@@ -52,7 +52,7 @@ a=""
 # TODO change the lab dir to the correct one
 for i in $(grep "$1" $trashlog | awk '{ print $1 }')
 do
-	a=$(echo $i | sed -e 's,/home/user/lab-4/,,')
+	a=$(echo $i | sed -e 's,$PWD,,')
 	if [ $a == $f ];
 	then 
 		break
@@ -69,7 +69,7 @@ for i in $(grep "$1" $trashlog | awk '{ print $NF }')
 do
 	file=$(grep $i $trashlog | awk '{ $NF=""; print $0 }')
 	file=$(echo "$file" | sed 's/ *$//')
-	read -p "${file} Are you sure?: [y/n] " ans
+	read -p "$file Are you sure?: [y/n] " ans
 	case "$ans" in
 		"y")
 			newfilename=""
@@ -82,24 +82,24 @@ do
 				if [[ -f "${home}/${filename}" ]];
 				then
 					read -p "File \"${filename}\" already exists. Enter the new name: " newfilename
-					ln "${trashdir}/${num}" "${home}/${newfilename}"
-					rm "${trashdir}/${num}" 
+					ln "$trashdir/$num" "$home/$newfilename"
+					rm "$trashdir/$num" 
 				else
-					ln "${trashdir}/${num}" "${home}/${filename}"
-					rm "${trashdir}/${num}"
+					ln "$trashdir/$num" "$home/$filename"
+					rm "$trashdir/${num"
 				fi
 			else
-				if [[ -f "${filename}" ]];
+				if [[ -f "$filename" ]];
 				then
-					read -p "File \"${filename}\" already exists. Enter the new name: " newfilename
-					ln "${trashdir}/${num}" "${restoredir}/${newfilename}"
-					rm "${trashdir}/${num}" 
+					read -p "File \"$filename\" already exists. Enter the new name: " newfilename
+					ln "$trashdir/$num" "$restoredir/$newfilename"
+					rm "$trashdir/$num" 
 				else
-					ln "${trashdir}/${num}" "${restoredir}/${filename}"
-					rm "${trashdir}/${num}" 
+					ln "$trashdir/$num" "$restoredir/$filename"
+					rm "$trashdir/$num" 
 				fi
 			fi
-			sed "/${num}/d" $trashlog > .trash.log2 && mv .trash.log2 $trashlog
+			sed "/$num/d" $trashlog > .trash.log2 && mv .trash.log2 $trashlog
 			echo "success"
 			;;
 		*)
