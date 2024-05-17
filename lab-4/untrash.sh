@@ -52,7 +52,7 @@ a=""
 # TODO change the lab dir to the correct one
 for i in $(grep "$1" $trashlog | awk '{ print $1 }')
 do
-	a=$(echo $i | sed -e 's,$PWD,,')
+	a=$(basename $i)
 	if [ $a == $f ];
 	then 
 		break
