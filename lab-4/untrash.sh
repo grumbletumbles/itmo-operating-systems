@@ -40,20 +40,11 @@ then
 	exit 1
 fi
 
-if [[ ! $key =~ ^[0-9a-zA-Z._-]+$ ]];
+if [[ ! $1 =~ ^[0-9a-zA-Z._-]+$ ]];
 then
 	echo "bad input"
 	exit 1
 fi
-
-
-_first=$(echo $1 | cut -c1-1)
-if ! [[ $first ~= ^[0-9a-zA-Z.]+$ ]];
-then
-	echo "bad input"
-	exit 1
-fi
-
 
 f=$1
 a=""
