@@ -31,7 +31,8 @@ do
 			exit 0
 			;;
 		*)
-			killall tail
+			tailid=$(ps --ppid="$$" -o pid,cmd | grep "tail" | awk '{print $1}')
+			killall $tailid
 			echo "handler error"
 			exit 1
 			;;
