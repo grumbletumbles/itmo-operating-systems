@@ -23,9 +23,14 @@ then
 	mkdir /home/user/.trash
 fi
 
-value=$(cat /home/user/.trash.log | sort -nk2,2 | tail -1 | awk '{ print $2}')
+if [[ ! -f "/home/user/.trash.log" ]] 
+then
+	touch /home/user/.trash.log
+fi
+
+value=$(cat /home/user/.trash.log | sort -nk2,2 | tail -1 | awk '{ print $1}')
 value=$(($value + 1))
-ln "$PWD/"$1 "/home/user/.trash/"$value
+ln "$PWD/$1" "/home/user/.trash/$value"
 
 echo $value $(readlink -f $1) >> /home/user/.trash.log
 rm -- "$1"
