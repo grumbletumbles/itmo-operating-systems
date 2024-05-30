@@ -62,7 +62,7 @@ fi
 while IFS= read -u 3 -r line;
 do
 	file=$(echo "$line" | cut -d ' ' -f 2-)
-	i=$(echo "$file" | grep -F "$1")
+	i=$(echo "$file" | grep -F -- "$1")
 	if [[ -z "$i" ]];
 	then
 		continue
