@@ -32,5 +32,5 @@ value=$(cat /home/user/.trash.log | sort -nk2,2 | tail -1 | awk '{ print $1}')
 value=$(($value + 1))
 ln "$PWD/$1" "/home/user/.trash/$value"
 
-echo "$value" $(readlink -f $1) >> /home/user/.trash.log
+echo "$value" $(readlink -f "$1") >> /home/user/.trash.log
 rm -- "$1"
