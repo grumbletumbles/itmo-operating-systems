@@ -41,16 +41,9 @@ then
 	exit 1
 fi
 
-if [[ ! $1 =~ ^[0-9a-zA-Z._-]+$ ]];
-then
-	echo "bad input"
-	exit 1
-fi
-
 f=$1
 a=""
-# TODO change the lab dir to the correct one
-for i in $(grep "$1" $trashlog | awk '{ print $2 }')
+for i in $(grep "$f" $trashlog | cut -d ' ' -f 2-)
 do
 	a=$(basename $i)
 	if [ $a == $f ];
