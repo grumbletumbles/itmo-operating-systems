@@ -59,16 +59,21 @@ then
 	exit 1
 fi
 
-for i in $(grep "$1" $trashlog | awk '{ print $NF }')
+while IFS= read -u 3 -r line;
 do
-	file=$(grep $i $trashlog | cut -d ' ' -f 1-)
+	file=$(echo "$line" | cut -d ' ' -f 2-)
+	i=$(echo "$file" | grep -F "$1")
+	if [[ -z "$i" ]];
+	then
+		continue
+	fi
 	file=$(echo "$file" | sed 's/ *$//')
 	ans=""
 	read -p "$file Are you sure?: [y/n] " ans
 	case "$ans" in
 		"y")
 			newfilename=""
-			num=$i
+			num=$(echo "$line" | cut -d ' ' -f 1)
 			restoredir=$(echo "$file" | awk 'BEGIN{FS=OFS="/"}; { $NF=""; print $0 }')
 			filename=$(echo "$file" | awk 'BEGIN{FS="/"}; { print $NF }')
 			if [[ ! -d $restoredir ]];
@@ -101,4 +106,4 @@ do
 			continue
 			;;
 	esac
-done
+done 3< $trashlog
