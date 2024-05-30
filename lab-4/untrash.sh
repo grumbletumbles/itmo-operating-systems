@@ -69,6 +69,7 @@ for i in $(grep "$1" $trashlog | awk '{ print $NF }')
 do
 	file=$(grep $i $trashlog | awk '{ $NF=""; print $0 }')
 	file=$(echo "$file" | sed 's/ *$//')
+	ans=""
 	read -p "$file Are you sure?: [y/n] " ans
 	case "$ans" in
 		"y")
