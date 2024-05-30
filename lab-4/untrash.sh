@@ -79,25 +79,25 @@ do
 			if [[ ! -d $restoredir ]];
 			then
 				echo "Directory ${restoredir} not found. File \"${filename}\" will be restored in home directory."
-				if [[ -f "${home}/${filename}" ]];
-				then
+				while [[ -f "${home}/${filename}" ]];
+				do
 					read -p "File \"${filename}\" already exists. Enter the new name: " newfilename
 					ln "$trashdir/$num" "$home/$newfilename"
 					rm "$trashdir/$num" 
 				else
 					ln "$trashdir/$num" "$home/$filename"
 					rm "$trashdir/$num"
-				fi
+				done
 			else
-				if [[ -f "$filename" ]];
-				then
+				while [[ -f "$filename" ]];
+				do
 					read -p "File \"$filename\" already exists. Enter the new name: " newfilename
 					ln "$trashdir/$num" "$restoredir/$newfilename"
 					rm "$trashdir/$num" 
 				else
 					ln "$trashdir/$num" "$restoredir/$filename"
 					rm "$trashdir/$num" 
-				fi
+				done
 			fi
 			sed "/$num/d" $trashlog > .trash.log2 && mv .trash.log2 $trashlog
 			echo "success"
