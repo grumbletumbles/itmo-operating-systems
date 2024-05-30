@@ -43,15 +43,15 @@ fi
 
 f=$1
 a=""
-while IFS= read -r $trashlog;
+while IFS= read -r line;
 do
 	i=$(echo $line | cut -d ' ' -f 2-)
-	a=$(basename $i)
+	a=$(echo "$i" | rev | cut -d '/' -f 1| rev)
 	if [ "$a" == "$f" ];
 	then
 		break
 	fi
-done
+done < $trashlog
 
 if [[ $a != $f ]];
 then
