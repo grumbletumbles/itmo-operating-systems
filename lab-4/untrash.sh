@@ -43,11 +43,12 @@ fi
 
 f=$1
 a=""
-for i in $(grep "$f" $trashlog | cut -d ' ' -f 2-)
+while IFS= read -r $trashlog;
 do
+	i=$(echo $line | cut -d ' ' -f 2-)
 	a=$(basename $i)
-	if [ $a == $f ];
-	then 
+	if [ "$a" == "$f" ];
+	then
 		break
 	fi
 done
