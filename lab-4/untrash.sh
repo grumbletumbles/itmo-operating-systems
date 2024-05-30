@@ -50,7 +50,7 @@ fi
 f=$1
 a=""
 # TODO change the lab dir to the correct one
-for i in $(grep "$1" $trashlog | awk '{ print $1 }')
+for i in $(grep "$1" $trashlog | awk '{ print "$2" }')
 do
 	a=$(basename $i)
 	if [ $a == $f ];
