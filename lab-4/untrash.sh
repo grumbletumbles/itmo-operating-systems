@@ -50,7 +50,7 @@ fi
 f=$1
 a=""
 # TODO change the lab dir to the correct one
-for i in $(grep "$1" $trashlog | awk '{ print "$2" }')
+for i in $(grep "$1" $trashlog | awk '{ print $2 }')
 do
 	a=$(basename $i)
 	if [ $a == $f ];
@@ -67,7 +67,7 @@ fi
 
 for i in $(grep "$1" $trashlog | awk '{ print $NF }')
 do
-	file=$(grep $i $trashlog | awk '{ $NF=""; print $0 }')
+	file=$(grep $i $trashlog | cut -d ' ' -f 1-)
 	file=$(echo "$file" | sed 's/ *$//')
 	ans=""
 	read -p "$file Are you sure?: [y/n] " ans
