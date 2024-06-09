@@ -12,5 +12,6 @@ do
 	if [[ $counter == 10000 ]];
 	then
 		echo "${#array[@]}" >> report.log
+		counter=0
 	fi
 done
